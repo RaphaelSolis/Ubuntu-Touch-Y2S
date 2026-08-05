@@ -6,7 +6,8 @@ deviceinfo_manufacturer="Samsung"
 deviceinfo_codename="y2slte"
 deviceinfo_arch="aarch64"
 deviceinfo_halium_version="11"
-deviceinfo_ubuntu_touch_release="noble"
+deviceinfo_ubuntu_touch_release="24.04-1.x"
+deviceinfo_system_partition_size="3900M"
 
 ##########
 # Kernel
