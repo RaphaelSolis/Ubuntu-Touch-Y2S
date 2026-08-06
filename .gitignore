@@ -4,3 +4,5 @@ ota
 images
 out
 deviceinfo
+*.img
+*.tar.gz
