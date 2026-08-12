@@ -6,3 +6,5 @@ out
 deviceinfo
 *.img
 *.tar.gz
+*.tar.xz
+UTFamily-Samsung-Exynos9830/
