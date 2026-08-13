@@ -538,21 +538,21 @@ mountroot() {
 		mount -o "$_syspart_options" $_syspart /halium-system
 	elif [ -f "$imagefile" ]; then
 		# Rootfs is an image file
-		mount -o loop,rw $imagefile /halium-system
+		for i in 1 2 3 4 5; do 		mount -o loop,rw $imagefile /halium-system && break; sleep 1; done
 	elif [ -d "$imagefile" ]; then
 		# Rootfs is a directory
 		mount -o bind /tmpmnt/halium-rootfs /halium-system
 	fi
 	
 	# create samsung mountpoints in android image, and name the device
-	mount -o loop,rw /halium-system/var/lib/lxc/android/android-rootfs.img /halium-system
+		for i in 1 2 3 4 5; do 	mount -o loop,rw /halium-system/var/lib/lxc/android/android-rootfs.img /halium-system && break; sleep 1; done
 	mkdir /halium-system/efs
 	umount /halium-system
 
 	# Identify image mode: either "rootfs" or "system"
 	mkdir -p /android-rootfs
 	mkdir -p /android-system
-	mount -o loop,rw /halium-system/var/lib/lxc/android/android-rootfs.img /android-rootfs
+		for i in 1 2 3 4 5; do 	mount -o loop,rw /halium-system/var/lib/lxc/android/android-rootfs.img /android-rootfs && break; sleep 1; done
 	mkdir -p /android-rootfs/efs
 	umount /android-rootfs
 
@@ -586,11 +586,11 @@ mountroot() {
 	if [ $file_layout = "halium" ]; then
 		# rootfs.img and Android system.img are separate
 		tell_kmsg "mounting android system image from userdata partition"
-		mount -o loop,$MOUNT "/tmpmnt/$ANDROID_IMAGE" $MOUNT_LOCATION
+		for i in 1 2 3 4 5; do 		mount -o loop,$MOUNT "/tmpmnt/$ANDROID_IMAGE" $MOUNT_LOCATION && break; sleep 1; done
 	else
 		# Android system.img is inside rootfs
 		tell_kmsg "mounting android system image from system rootfs"
-		mount -o loop,$MOUNT "/halium-system/var/lib/lxc/android/$ANDROID_IMAGE" $MOUNT_LOCATION
+		for i in 1 2 3 4 5; do 		mount -o loop,$MOUNT "/halium-system/var/lib/lxc/android/$ANDROID_IMAGE" $MOUNT_LOCATION && break; sleep 1; done
 	fi
 
 	[ $? -eq 0 ] || tell_kmsg "WARNING: Failed to mount Android system.img."
